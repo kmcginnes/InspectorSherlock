@@ -3,11 +3,15 @@ InspectorSherlock
 
 An analysis engine which takes a current state and infers a list of probable commands that will result in the given expected state.
 
-# Sherlock Discovery Engine
+Why, it's elementary my dear Watson!
+
+This is very much a work in progress
+
+Below are the notes taken durring a late night design meeting.
 
 * Have a case which is the old object and the new object with the mystery of what has changed between them. Basically finding the delta as a list of commands
 
-## Dictionary
+## Dictionary & Requirements
 * Newton's Third Law - Pulls together all dependencies and loops over the possible commands for the aggregate in question and collects the resulting data for execution.
 * Case - overall container or aggregate
 * Probabilities - the command that is probably the user's intention returns a suspect
@@ -27,12 +31,14 @@ An analysis engine which takes a current state and infers a list of probable com
 
 * We have to add/eliminate suspects
 
-Elementary my dear Watson
+## Code example
 
-var suspectTypes = new [] {
-	typeof(AddCigar),
-	typeof(RemoveCigar),
-	typeof(PurchaseCigarBox),
-};
-SuspectList.AddCase<CigarBox>().With(suspectTypes);
-var hypothesis = Sherlock.BuildCase(oldCigarBox, newCigarBox).InferSuspects();
+Here's an example of what the code might look like:
+
+    var suspectTypes = new [] {
+        typeof(AddCigar),
+        typeof(RemoveCigar),
+        typeof(PurchaseCigarBox),
+    };
+    SuspectList.AddCase<CigarBox>().With(suspectTypes);
+    var hypothesis = Sherlock.BuildCase(oldCigarBox, newCigarBox).InferSuspects();
